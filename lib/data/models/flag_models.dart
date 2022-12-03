@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:nbu_api/models/nbu_class.dart';
 import 'package:nbu_api/utils/images.dart';
 
 class NbuFlags {

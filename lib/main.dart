@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:nbu_api/data/api_service/api_service.dart';
+import 'package:nbu_api/data/repositories/app_repositories.dart';
 import 'package:nbu_api/screens/home_page.dart';
+import 'package:nbu_api/view_model/nbu_view_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  AppRepository appRepository = AppRepository(apiService: ApiService());
+  NbuViewModel nbuViewModel = NbuViewModel(appRepository: appRepository);
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => nbuViewModel),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -12,11 +25,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch:  Colors.grey,
+        primarySwatch: Colors.blue,
       ),
-      home: const NbuPage(),
+      home: const HomePage(),
+      
     );
   }
 }
